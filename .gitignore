@@ -134,4 +134,5 @@ dmypy.json
 *.ckpt
 *.JPG
 
-project-3/dataset/tushar5harma/plant-village-dataset-updated/
+dataset
+models
