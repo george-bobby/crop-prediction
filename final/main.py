@@ -55,6 +55,48 @@ warnings.filterwarnings("ignore")
 WORKSPACE_DIR = os.path.abspath(os.getcwd())
 print(f"✅ Workspace: {WORKSPACE_DIR}")
 
+# =========================
+# AUTO-TRAIN IF NEEDED
+# =========================
+def check_and_train_models():
+    """Check if models exist, if not, train them automatically"""
+    save_dir_candidates = [
+        os.path.join(WORKSPACE_DIR, "saved_model"),
+        os.path.join(WORKSPACE_DIR, "final", "saved_model"),
+        os.path.join(os.path.dirname(WORKSPACE_DIR), "saved_model"),
+    ]
+    
+    # Check if any saved_model directory exists with models
+    model_exists = False
+    for save_dir in save_dir_candidates:
+        if os.path.exists(save_dir) and os.path.exists(os.path.join(save_dir, "metadata.json")):
+            model_exists = True
+            break
+    
+    if not model_exists:
+        print("\n" + "="*80)
+        print("⚠️  NO TRAINED MODELS FOUND")
+        print("="*80)
+        print("Starting automatic model training...")
+        print("This will take 5-10 minutes. Please wait...\n")
+        
+        # Run training script
+        train_script = os.path.join(WORKSPACE_DIR, "train_simple.py")
+        if os.path.exists(train_script):
+            import subprocess
+            result = subprocess.run([sys.executable, train_script], 
+                                  capture_output=False, text=True)
+            if result.returncode == 0:
+                print("\n✅ Model training completed successfully!")
+            else:
+                print("\n⚠️ Model training encountered issues but continuing...")
+        else:
+            print(f"⚠️ Training script not found: {train_script}")
+            print("   Continuing in DEMO mode...")
+
+# Auto-train if needed (comment out this line to skip auto-training)
+check_and_train_models()
+
 warnings.filterwarnings("ignore")
 
 
