@@ -4,7 +4,17 @@ Complete automated crop analysis system with yield prediction, disease detection
 
 ## 🚀 Quick Start (Fully Automated)
 
-### Option 1: One Command (Recommended)
+### Step 1: Install Dependencies (First Time Only)
+
+```bash
+# Make sure you're in the virtual environment
+source .venv/bin/activate  # or: source ../venv/bin/activate
+
+# Install all required packages
+pip install numpy pandas gradio plotly pillow tensorflow scikit-learn catboost category-encoders
+```
+
+### Step 2: Run the App
 
 ```bash
 cd final
@@ -17,11 +27,11 @@ python main.py
 3. 🌐 Launch the web interface
 4. 🎉 Open in your browser
 
-### Option 2: Manual Training (if you want control)
+### Alternative: Manual Training (if you want control)
 
 ```bash
 cd final
-python train_simple.py    # Train models first
+python train_simple.py    # Train models first (optional)
 python main.py            # Then launch app
 ```
 
