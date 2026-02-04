@@ -6,4 +6,4 @@ __pycache__/
 .env
 .vscode/
 .idea/
-models/
+models/yield_model.pkl
